@@ -1,166 +1,17 @@
 <!DOCTYPE html>
-<html lang="de">
+<html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>R1 DSA</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: #101010;
-      color: white;
-      font-family: Arial, sans-serif;
-      width: 100vw;
-      min-height: 100vh;
-      overflow: hidden;
-    }
-
-    .header {
-      padding: 14px 12px 8px;
-      font-size: 21px;
-      font-weight: bold;
-    }
-
-    .status {
-      margin: 0 12px 10px;
-      padding: 8px;
-      border-radius: 8px;
-      background: #252525;
-      font-size: 13px;
-    }
-
-    .heroes {
-      padding: 0 12px;
-    }
-
-    .hero {
-      padding: 9px 10px;
-      margin-bottom: 6px;
-      background: #252525;
-      border-radius: 8px;
-      font-size: 17px;
-    }
-
-    .footer {
-      position: fixed;
-      bottom: 8px;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      font-size: 11px;
-      opacity: 0.55;
-    }
-  </style>
+  <script>
+    window.location.replace("http://dsa5.local:5000/r1");
+  </script>
 </head>
 
-<body>
-
-  <div class="header">
-    DSA5 Helden
-  </div>
-
-  <div id="status" class="status">
-    Suche Pi …
-  </div>
-
-  <div id="heroes" class="heroes"></div>
-
-  <div class="footer">
-    R1 DSA · Test v0.1
-  </div>
-
-
-<script>
-
-const API =
-  "http://dsa5.local:5000/api/r1/test";
-
-async function loadHeroes() {
-
-  const status =
-    document.getElementById("status");
-
-  const heroes =
-    document.getElementById("heroes");
-
-  heroes.innerHTML = "";
-
-  try {
-
-    const response =
-      await fetch(API, {
-        cache: "no-store"
-      });
-
-    if (!response.ok) {
-      throw new Error(
-        "HTTP " + response.status
-      );
-    }
-
-    const data =
-      await response.json();
-
-    status.textContent =
-      "✓ Pi verbunden";
-
-    if (
-      !data.heroes ||
-      data.heroes.length === 0
-    ) {
-
-      heroes.innerHTML =
-        '<div class="hero">Keine Helden</div>';
-
-      return;
-    }
-
-    data.heroes.forEach(name => {
-
-      const item =
-        document.createElement("div");
-
-      item.className =
-        "hero";
-
-      item.textContent =
-        "● " + name;
-
-      heroes.appendChild(item);
-
-    });
-
-  }
-
-  catch(error) {
-
-    status.textContent =
-      "✕ Pi nicht erreichbar";
-
-    heroes.innerHTML =
-      '<div class="hero">' +
-      'dsa5.local nicht gefunden' +
-      '</div>';
-
-  }
-
-}
-
-loadHeroes();
-
-setInterval(
-  loadHeroes,
-  5000
-);
-
-</script>
-
+<body style="background:#101010;color:white;font-family:Arial;padding:20px;">
+  Verbinde mit DSA5 …
 </body>
 </html>
